@@ -6,17 +6,21 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { provideState, provideStore } from '@ngrx/store';
 import { counterReducer } from './shared/states/counter/counter.reducer';
+import { provideHttpClient } from '@angular/common/http';
+
 // add Zoneless Change Detection 
 //import { provideExperimentalZonelessChangeDetection } from '@angular/core';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    PagesModule
+    PagesModule,
+
   ],
   providers: [
     // add Zoneless Change Detection 
@@ -24,6 +28,7 @@ import { counterReducer } from './shared/states/counter/counter.reducer';
 
     provideStore(),
     provideState({ name: 'counter', reducer: counterReducer }),
+    provideHttpClient(),
   ],
   bootstrap: [AppComponent]
 })

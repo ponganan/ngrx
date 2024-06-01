@@ -1,0 +1,38 @@
+<div class="vertical-center-full-height">
+
+    <ul style="list-style-type:circle">
+        @for (item of products$ | async; track item) {
+        <li>
+            {{ item.title}}
+        </li>
+        }
+    </ul>
+    <br>
+    <br>
+
+    <ul style="list-style-type:disc">
+        @for (item of products$ | async; track item ; let index = $index) {
+        <li>
+            {{ index + 1 }} - {{ item.category }}
+        </li>
+        }
+    </ul>
+    <br>
+    <br>
+
+    <div>
+        <table>
+            <tr *ngFor="let products2 of products$ | async; let srNo = index ">
+                <td>
+                    {{srNo+1}}
+                </td>
+                <td>
+                    {{products2.image}}
+                </td>
+            </tr>
+        </table>
+    </div>
+
+</div>
+
+<app-product-card></app-product-card>
