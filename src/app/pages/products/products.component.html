@@ -1,4 +1,4 @@
-<div class="vertical-center-full-height">
+<!-- <div class="vertical-center-full-height">
 
     <ul style="list-style-type:circle">
         @for (item of products$ | async; track item) {
@@ -32,7 +32,10 @@
             </tr>
         </table>
     </div>
+</div> -->
 
+<div class="grid grid-cols-3 gap-5">
+    @for (item of products$ | async; track $index) {
+    <app-product-card [product]="item" (handleAdd)="addItemToCart($event)"></app-product-card>
+    }
 </div>
-
-<app-product-card></app-product-card>

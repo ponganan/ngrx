@@ -5,6 +5,10 @@ import { CounterComponent } from './counter/counter.component';
 import { HeadComponent } from './head/head.component';
 import { ProductsComponent } from './products/products.component';
 import { ProductCardComponent } from '../shared/pages/product-card/product-card.component';
+import { SignupComponent } from './signup/signup.component';
+import { CartComponent } from './cart/cart.component';
+import { RouterLink } from '@angular/router';
+import { SignInComponent } from './sign-in/sign-in.component';
 
 
 
@@ -14,10 +18,14 @@ import { ProductCardComponent } from '../shared/pages/product-card/product-card.
     CounterComponent,
     HeadComponent,
     ProductsComponent,
-    ProductCardComponent
+    ProductCardComponent,
+    SignupComponent,
+    CartComponent,
+    SignInComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterLink
   ],
   exports: [
     DetailsComponent,
