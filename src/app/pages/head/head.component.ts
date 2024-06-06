@@ -4,7 +4,7 @@ import { AppState } from '../../shared/states/app.state';
 import { Store } from '@ngrx/store';
 import { selectCount } from '../../shared/states/counter/counter.selector';
 import { IProduct } from '../../shared/models/product.interface';
-import { selectCartProducts } from '../../core/states/cart/cart.selector';
+import { selectCartProducts, selectTotal } from '../../core/states/cart/cart.selector';
 
 @Component({
   selector: 'app-head',
@@ -13,8 +13,9 @@ import { selectCartProducts } from '../../core/states/cart/cart.selector';
 })
 export class HeadComponent {
 
-  count$: Observable<number>;
+  totalPrice$ = this.store.select(selectTotal);
 
+  count$: Observable<number>;
   products$: Observable<IProduct[]>;
 
   constructor(private store: Store<AppState>) {

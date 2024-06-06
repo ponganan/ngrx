@@ -35,7 +35,13 @@
 </div> -->
 
 <div class="grid grid-cols-3 gap-5">
+    @if(error$ | async){
+    <h1>Something went wrong while loading products</h1>
+    }
+    @else {
     @for (item of products$ | async; track $index) {
     <app-product-card [product]="item" (handleAdd)="addItemToCart($event)"></app-product-card>
     }
+    }
+
 </div>

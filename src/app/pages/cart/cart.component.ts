@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { AppState } from '../../shared/states/app.state';
 import { Store } from '@ngrx/store';
-import { selectCartProducts } from '../../core/states/cart/cart.selector';
+import { selectCartProducts, selectTotal } from '../../core/states/cart/cart.selector';
 import { decrementProduct, incrementProduct, removeProduct } from '../../core/states/cart/cart.action';
 
 @Component({
@@ -12,6 +12,7 @@ import { decrementProduct, incrementProduct, removeProduct } from '../../core/st
 export class CartComponent {
 
   cartItem$ = this.store.select(selectCartProducts);
+  totalPrice$ = this.store.select(selectTotal);
 
   constructor(private store: Store<AppState>) { }
 

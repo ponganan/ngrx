@@ -1,10 +1,11 @@
-import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, inject } from '@angular/core';
 import { Observable } from 'rxjs'
 import { IProduct } from '../../shared/models/product.interface';
 import { ProductApiService } from '../../shared/services/product-api.service';
 import { Store } from '@ngrx/store';
 import { addToCart } from '../../core/states/cart/cart.action';
+import * as ProductActions from '../../core/states/product/product.action';
+import * as ProductSelectors from '../../core/states/product/product.selector';
 
 @Component({
   selector: 'app-products',
@@ -13,44 +14,27 @@ import { addToCart } from '../../core/states/cart/cart.action';
 })
 export class ProductsComponent implements OnInit {
 
-  //productArray: any[] = [];
+  //productApi = inject(ProductApiService);
 
-  productApi = inject(ProductApiService);
+  //products$ = this.productApi.getProducts() as Observable<IProduct[]>;
 
-  http = inject(HttpClient);
-  //holds the Observable value with xxx$ .
-  products$ = this.http.get('https://fakestoreapi.com/products/') as Observable<IProduct[]>;
+  // use ngrx effect
 
+  products$!: Observable<IProduct[]>;
+  error$!: Observable<string | null>;
 
-  // constructor() {
-  //   this.loadAllProduct();
-  // }
+  constructor(private store: Store<{ cart: { products: IProduct[] } }>) {
 
-  constructor(private store: Store<{ cart: { products: IProduct[] } }>) { }
-
-  ngOnInit(): void {
-    //  this.loadAllProduct();
-
-    // this.http.get('https://fakestoreapi.com/products/').subscribe(res => {
-    //   console.log(res);
-    // }
-    // )
-
-    this.productApi.getProducts().subscribe(res => {
-      console.log(res);
-    })
-
-
+    this.store.dispatch(ProductActions.loadProduct());
+    this.products$ = this.store.select(ProductSelectors.selectAllProducts);
+    this.error$ = this.store.select(ProductSelectors.selectProductError);
   }
 
-  // loadAllProduct() {
-  //   this.http.get('https://fakestoreapi.com/products/1').subscribe((res: any) => {
-  //     this.productArray = res;
-  //   })
-  // }
+  ngOnInit(): void { }
 
   addItemToCart(product: IProduct) {
-    this.store.dispatch(addToCart({ product }))
+    this.store.dispatch(addToCart({ product }));
   }
+
 }
 

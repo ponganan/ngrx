@@ -6,8 +6,11 @@ import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
 import { provideState, provideStore } from '@ngrx/store';
 import { counterReducer } from './shared/states/counter/counter.reducer';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withFetch } from '@angular/common/http';
 import { cartReducer } from './core/states/cart/cart.reducer';
+import { ProductReducer } from './core/states/product/product.reducer';
+import { provideEffects } from '@ngrx/effects';
+import { ProductEffect } from './core/states/product/product.effect';
 
 // add Zoneless Change Detection 
 //import { provideExperimentalZonelessChangeDetection } from '@angular/core';
@@ -27,11 +30,14 @@ import { cartReducer } from './core/states/cart/cart.reducer';
     // add Zoneless Change Detection 
     // provideExperimentalZonelessChangeDetection()
 
+    provideHttpClient(withFetch()),
     provideStore(),
     provideState({ name: 'counter', reducer: counterReducer }),
     provideState({ name: 'cart', reducer: cartReducer }),
-    provideHttpClient(),
+    provideState({ name: 'product', reducer: ProductReducer }),
+    provideEffects(ProductEffect),
+
   ],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule { }  
