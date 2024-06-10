@@ -7,14 +7,29 @@
         </tr>
         <tr>
             <td>
-                <h2>{{count$ | async}}</h2> <br><br>
+                <!-- <h2>{{count$ | async}}</h2> <br><br> -->
+                <h2>Single : {{counterStore.count()}}</h2>
             </td>
         </tr>
         <tr>
             <td>
+                <!-- <h2>{{count$ | async}}</h2> <br><br> -->
+                <h2>Double : {{this.double()}}</h2>
+            </td>
+        </tr>
+        <!-- <tr>
+            <td>
                 <button (click)="increment()">Increment</button>&nbsp;&nbsp;<button
                     (click)="decrement()">Decrement</button>&nbsp;&nbsp;
                 <button (click)="reset()">Reset</button>
+            </td>
+        </tr> -->
+
+        <tr>
+            <td>
+                <button (click)="this.counterStore.increment()">Increment</button>&nbsp;&nbsp;<button
+                    (click)="this.counterStore.decrement()">Decrement</button>&nbsp;&nbsp;
+                <button (click)="counterStore.reset()">Reset</button>
             </td>
         </tr>
     </table>

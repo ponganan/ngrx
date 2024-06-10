@@ -11,6 +11,7 @@ import { cartReducer } from './core/states/cart/cart.reducer';
 import { ProductReducer } from './core/states/product/product.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { ProductEffect } from './core/states/product/product.effect';
+import { CounterStore } from './shared/states/signalcounter/counter.store';
 
 // add Zoneless Change Detection 
 //import { provideExperimentalZonelessChangeDetection } from '@angular/core';
@@ -36,6 +37,8 @@ import { ProductEffect } from './core/states/product/product.effect';
     provideState({ name: 'cart', reducer: cartReducer }),
     provideState({ name: 'product', reducer: ProductReducer }),
     provideEffects(ProductEffect),
+    [CounterStore],
+
 
   ],
   bootstrap: [AppComponent]
