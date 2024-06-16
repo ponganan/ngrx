@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PagesModule } from './pages/pages.module';
-import { provideState, provideStore } from '@ngrx/store';
+import { provideState, provideStore, StoreModule } from '@ngrx/store';
 import { counterReducer } from './shared/states/counter/counter.reducer';
 import { provideHttpClient, withFetch } from '@angular/common/http';
 import { cartReducer } from './core/states/cart/cart.reducer';
@@ -25,6 +25,7 @@ import { CounterStore } from './shared/states/signalcounter/counter.store';
     BrowserModule,
     AppRoutingModule,
     PagesModule,
+    StoreModule.forRoot({}, {}),
 
   ],
   providers: [
